@@ -1,5 +1,11 @@
 package Blackjack;
 
+/*** 개선할 점 ***/
+/* 게임 중 hit/stay에 대한 선택 시, 대소문자 구분 없이 입력되도록 코드 수정 */
+/* Match가 이뤄질 때마다 전적(승무패) 표시 */
+/* 판돈 베팅 기능 추가 */
+/* 코드 정리 : 가독성 높이고, 관리 용이하게*/ 
+
 import java.util.Scanner;
 import java.util.Arrays;
 // ---------- Card ---------- //

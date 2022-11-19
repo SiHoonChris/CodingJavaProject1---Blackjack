@@ -40,4 +40,12 @@
 
 - 이전 Repository : JavaStudy
 - JavaStudy 내의 Commit 기록들  
-(10-19-2022) &nbsp; 
+(10-19-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/4cb7c10c8469d6c5b418385774517e116f8d1fd4  
+(10-20-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/b03d5f3a5eb06121c930cd74359c4fe455ed9463  
+(10-21-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/0443ceddd06bbabaf0fa4651f3588bc1e82d0ada  
+(10-22-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/6974413870c21b48baf140a8d13f18c51ed9ba71  
+(10-23-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/1710c51f52bd9c5bb7fb89049dbfe2217f4b93b5  
+(10-24-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/3883b58b9d55c4bfbe46e8adfdbda3fc4dd9be2b  
+(10-25-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/c222508e2be73998a19f73b097231e75799b6547  
+(10-26-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/c5f8895a5ad644eca09dad834c3d03ea1259d085  
+(10-27-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/f8729d5d7bd4d09eff7aeb82f24f4b115bd7953d  

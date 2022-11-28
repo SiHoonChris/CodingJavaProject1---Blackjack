@@ -1,10 +1,5 @@
 package Blackjack;
 
-/*** 개선할 점 ***/
-/* 게임 중 hit/stay에 대한 선택 시, 대소문자 구분 없이 입력되도록 코드 수정 */
-/* Match가 이뤄질 때마다 전적(승무패) 표시 */
-/* 판돈 베팅 기능 추가 */
-/* 코드 정리 : 가독성 높이고, 관리 용이하게*/ 
 
 import java.util.Scanner;
 import java.util.Arrays;
@@ -142,6 +137,7 @@ class onTheTable{
 			System.out.println("[ GAME END! ] (카드 수 부족 또는 전체 카드 사용) ");
 			System.out.println("             - THANK YOU -");
 			System.out.println("==========================================");
+			System.out.println("                  - created by SiHoonChris");
 			System.exit(0);
 		}
 		
@@ -170,6 +166,7 @@ class onTheTable{
 			for(int i=4 ; ; i++) {
 				System.out.print("HIT or STAY ? =>  ");
 				String select = sc.next();
+				select = select.toUpperCase();
 					if(select.equals("HIT")) {
 						if(gamingDeck[i]!=0) {
 							Player[num]=gamingDeck[i];
@@ -187,6 +184,7 @@ class onTheTable{
 			for(int i=5 ; ; i++) {
 				System.out.print("HIT or STAY ? =>  ");
 				String select = sc.next();
+				select = select.toUpperCase();
 					if(select.equals("HIT")) {						
 						if(gamingDeck[i]!=0) {
 							Player[num]=gamingDeck[i];
@@ -260,7 +258,6 @@ class inTheGame{
 		for(int i=0; i<Dealer.length; i++) { if(Dealer[i]!=0) dealerUsed++; }
 		for(int i=0; i<Player.length; i++) { if(Player[i]!=0) playerUsed++; }
 		
-		// 메인메서드에서의 반복문 사용으로 인해, Dealer배열과 Player배열의 Length가 고정되어 변하지 않는 문제 발생. 해결
 		for(int i=0; i<Dealer.length; i++) { Dealer[i]=0; }
 		for(int i=0; i<Player.length; i++) { Player[i]=0; }
 
@@ -303,5 +300,6 @@ public class Blackjack{
 			int cardsUsed = G.cardsLeftInTheDeck(T.Dealer, T.Player);
 			G.renewTheCards(T.gamingDeck, cd.Deck, cardsUsed);
 		}
+		
 	}
 } // end - public class BlackjackADV

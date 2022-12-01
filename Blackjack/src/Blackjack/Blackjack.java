@@ -3,8 +3,6 @@ package Blackjack;
 
 import java.util.Scanner;
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
-
 
 // ---------- Card ---------- //
 // Only One Constructor, No Methods
@@ -74,6 +72,7 @@ class onTheTable{
 	Scanner sc = new Scanner(System.in);
 	cardDeck cd = new cardDeck();
 	inTheGame G = new inTheGame();
+	GameHost GH = new GameHost();
 		
 	// 0. 카드 재생성
 	public int[] converter() {  // private
@@ -140,12 +139,7 @@ class onTheTable{
 				finalMatch();
 			}
 			
-			System.out.println("\n==========================================");
-			System.out.println("             [ GAME END! ] ");
-			System.out.println("             - THANK YOU -");
-			System.out.println("==========================================");
-			System.out.println("                  - created by SiHoonChris");
-			System.exit(0);
+			GH.GameCloser();
 		}
 		
 	}
@@ -280,14 +274,7 @@ class onTheTable{
 			System.out.printf("[Player] Win: %d | Draw : %d | Lose : %d\n", playerStats[0], playerStats[1], playerStats[2]);
 			System.out.println("\n( Cards in a Deck : 0 )");
 		}
-		else if(goOrHalt==2) {
-			System.out.println("\n==========================================");
-			System.out.println("             [ GAME END! ] ");
-			System.out.println("             - THANK YOU -");
-			System.out.println("==========================================");
-			System.out.println("                  - created by SiHoonChris");
-			System.exit(0);
-		}
+		else if(goOrHalt==2) GH.GameCloser();
 	}
 	
 } // end - class onTheTable
@@ -297,45 +284,7 @@ class onTheTable{
 class inTheGame{
 	int cardRemain = cardDeck.Deck.length;
 	int cnt = 0; // renewTheCards()에 사용, 한 턴에 사용한 카드 장 수 누적
-	onTheTable T;
 	Scanner yn = new Scanner(System.in);
-	
-	
-	// 0. 게임 시작 인트로
-	public void gameStarter() {		
-		System.out.println("==========================================");
-		System.out.println("                Blackjack                 ");
-		System.out.println("==========================================\n");
-		System.out.println("            (Press the number)\n");
-		System.out.println("                  Play? ");
-		System.out.println("                1. Yes  ");
-		System.out.println("                2. No   ");
-		System.out.print  ("                => ");
-		int yesOrNo = yn.nextInt();
-		
-		if(yesOrNo==2) {
-			System.out.println("\n==========================================");
-			System.out.println("             [ GAME END! ] ");
-			System.out.println("             - THANK YOU -");
-			System.out.println("==========================================");
-			System.out.println("                  - created by SiHoonChris");
-			System.exit(0);
-		}
-		else if(yesOrNo==1) {
-			try {				
-				System.out.println("\n");
-				for(int i=5; i>=1; i--) {
-					System.out.println("                  "+i);
-					// https://www.delftstack.com/ko/howto/java/how-to-delay-few-seconds-in-java/
-					TimeUnit.SECONDS.sleep(1);
-				}
-				System.out.println("\n");
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
 	
 	// 1. 남은 카드 장 수 계산
 	public int cardsLeftInTheDeck(int[] Dealer, int[] Player) {
@@ -372,11 +321,12 @@ class inTheGame{
 public class Blackjack{
 	
 	public static void main(String[] args){
+		GameHost GH = new GameHost();
 		cardDeck cd = new cardDeck();
 		onTheTable T = new onTheTable();
 		inTheGame G = new inTheGame();
 		
-		G.gameStarter();
+		GH.GameOpener();
 		
 		cd.cardsInTheBox();
 		cd.shuffle();

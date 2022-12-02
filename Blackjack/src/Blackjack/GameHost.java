@@ -5,6 +5,10 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class GameHost {
+// Participate(), ParticipateCheck(), GameCloser(), GameOpener(), OnlyFourCards()
+
+	int lastFourCard; // 카드가 4장 남았을시 게임 진행에 대한 대답
+	
 	private void Participate() { // 게임 시작 전 확인
 		System.out.println("==========================================");
 		System.out.println("                Blackjack                 ");
@@ -56,10 +60,11 @@ public class GameHost {
 							// https://www.delftstack.com/ko/howto/java/how-to-delay-few-seconds-in-java/
 							TimeUnit.SECONDS.sleep(1);
 						}
-						System.out.println("\n");
+						System.out.println("\n");;
 						break;
 					}
 					catch(Exception e) {e.printStackTrace();}
+					sc.close();
 				}
 				if(choice==2) {
 					GameCloser();
@@ -73,5 +78,26 @@ public class GameHost {
 			}
 		}
 	} // END - public void GameOpener()
+	
+	public int OnlyFourCards() { // 카드가 4장 남았을시 게임 진행에 대한 질문
+		Scanner sc = new Scanner(System.in); //어떤 값을 입력하던 String타입으로 받아짐 - 예외 발생 안함. 그래서 굳이 반복문 안에다 안넣음
+
+		System.out.println("Only 4 cards remain");
+		System.out.println("[Player] cannot make a decision for hit/stay in this turn");
+		
+		while(true) {
+			System.out.println("(Press the number)");
+			System.out.print("1. continue  or  2. halt       => ");
+			String choice = sc.next();
+			
+			if(choice.equals("1")) lastFourCard=1;
+			else if(choice.equals("2")) lastFourCard=2;
+			
+			if(lastFourCard==1||lastFourCard==2) {
+				sc.close();
+				return lastFourCard;
+			}
+		}
+	} // END - public void OnlyFourCards()
 	
 } // END - public class GameHost {}

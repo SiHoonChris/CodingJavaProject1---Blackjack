@@ -27,7 +27,9 @@ class Card {
 	
 } // END - class Card {}
 
-public class CardDeck extends Card{
+//CardDeck(), Shuffle(), Converter(), cardsInTheDeck(int[] Dealer, int[] Player), Renew()
+public class CardDeck extends Card {
+	
 	public static Card[] Deck = new Card[52];
 	public static int[] gamingDeck = new int[52];
 	int unusedCard = Deck.length; // cardsInTheDeck()
@@ -91,4 +93,4 @@ public class CardDeck extends Card{
 		}
 	} // END - public void Renew(int[] ar1, Card[] ar2, int num)
 	
-} // End - public class cardDeck {}
+} // End - public class CardDeck extends Card {}

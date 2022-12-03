@@ -1,12 +1,16 @@
 package Blackjack;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+//Participate(), ParticipateCheck(), GameCloser(), GameOpener(), OnlyFourCards(), WhatIsYourAce(), WhatIsYourAce(int n), HitOrStay()
 public class GameHost {
-// Participate(), ParticipateCheck(), GameCloser(), GameOpener(), OnlyFourCards()
 
+	CardDeck CD; // CardDeck 클래스 호출
+	static int[] Dealer = new int[3];  // 매 Turn에서 Dealer가 보유한 카드 
+	static int[] Player = new int[12];  // 매 Turn에서 Player가 보유한 카드
 	int lastFourCard; // 카드가 4장 남았을시 게임 진행에 대한 대답
 	
 	private void Participate() { // 게임 시작 전 확인
@@ -99,5 +103,73 @@ public class GameHost {
 			}
 		}
 	} // END - public void OnlyFourCards()
+	
+	public void WhatIsYourAce() { // 'A'카드 보유시 그 값에 대하여 1 또는 11 선택
+		
+		while(true) {
+			Scanner sc = new Scanner(System.in);
+			
+			try {
+				System.out.print("1 or 11 ? =>  ");
+				int Answer = sc.nextInt();
+				
+				if(CD.Deck[0].number=="A" && Answer==11) Player[0]=11;
+				else if(CD.Deck[2].number=="A" && Answer==11) Player[1]=11;
+				else if(CD.Deck[0].number=="A" && CD.Deck[2].number=="A" && Answer==11) Player[0]=11;
+				
+				if(Answer==1||Answer==11) break;
+			}
+			catch(InputMismatchException e){
+				sc.reset();
+			}
+			
+		}
+	} // END - private void whatIsYourAce()
+	
+	public void WhatIsYourAce(int n) { // 추가로 받은 카드가 'A'카드일 때, 그 값에 대하여 1 또는 11 선택
+		
+		while(true) {
+			Scanner sc = new Scanner(System.in);
+			
+			try {
+				System.out.print("1 or 11 ? =>  ");
+				int Answer = sc.nextInt();
+				
+				if(Answer==11) Player[n]=11;
+				
+				if(Answer==1||Answer==11) break;
+			}
+			catch(InputMismatchException e) {
+				sc.reset();
+			}
+			
+		}
+	} // END - private void whatIsYourAce(int n)
+	
+	public void HitOrStay() { // Player의 카드 추가 여부 묻기
+		Scanner sc = new Scanner(System.in);
+		
+		int n;
+		if(Dealer[2]==0) n=4;
+		else 			 n=5;
+		
+		int num=2;
+		for(int i=n ; ; i++) {
+			System.out.print("HIT or STAY ? =>  ");
+			String select = sc.next();
+			select = select.toUpperCase();
+				if(select.equals("HIT")) {						
+					if(CD.gamingDeck[i]!=0) {
+						Player[num]=CD.gamingDeck[i];
+						System.out.print(CD.Deck[i].pattern+"-"+CD.Deck[i].number+"\n");
+						if(CD.Deck[i].number=="A") { WhatIsYourAce(num); }
+						num++;
+					} 
+					else { return; }
+				} else if(select.equals("STAY")) { return; }
+			if(Arrays.stream(Player).sum()>21) { return; }
+		}
+		
+	} // END - public void HitOrStay()
 	
 } // END - public class GameHost {}

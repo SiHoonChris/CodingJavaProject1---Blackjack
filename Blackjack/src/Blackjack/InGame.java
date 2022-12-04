@@ -7,6 +7,7 @@ public class InGame {
 
 	CardDeck CD = new CardDeck();
 	GameHost GH = new GameHost();
+
 	int dealerScore;
 	int playerScore;
 	int choice=0;
@@ -17,6 +18,8 @@ public class InGame {
 	
 	public void PlayBlackjack() { // 게임 진행 전반
 		try {
+			Timer clock = new Timer();
+			Thread timer = new Thread(clock);
 			for(int i=0; i<GH.Dealer.length; i++) GH.Dealer[i]=0;
 			for(int i=0; i<GH.Player.length; i++) GH.Player[i]=0;
 			// 메인 메서드에서 반복문 적용 => 코드 시작부분에서 최신화 안해줄시 계산 오류 생김
@@ -42,6 +45,7 @@ public class InGame {
 	
 			matchCnt++;
 			System.out.println("================= Turn "+matchCnt+" =================");
+			timer.start();
 	
 			System.out.print("[Dealer] =>  ");
 			System.out.print(CD.Deck[1].pattern+"-"+CD.Deck[1].number+"\t");
@@ -50,27 +54,32 @@ public class InGame {
 				System.out.print(CD.Deck[4].pattern+"-"+CD.Deck[4].number+"\n");
 			} 
 			System.out.printf("=> [%02d]", Arrays.stream(GH.Dealer).sum());
+			
+			boolean dealerBust=false;
+			if(Arrays.stream(GH.Dealer).sum()>21) dealerBust=true;			
 			// ---------------------------- 딜러 파트 끝 ---------------------------- //
 			
 			// --------------------------플레이어 파트 시작 --------------------------- //
 			System.out.print("\n[Player] =>  ");
 			System.out.print(CD.Deck[0].pattern+"-"+CD.Deck[0].number+"\t");
 			System.out.print(CD.Deck[2].pattern+"-"+CD.Deck[2].number+"\n");
-			if(CD.Deck[0].number=="A"||CD.Deck[2].number=="A") GH.WhatIsYourAce();
-			System.out.println();
 			
-			GH.HitOrStay();
-	
+			if(dealerBust==false) {
+				if(CD.Deck[0].number=="A"||CD.Deck[2].number=="A") GH.WhatIsYourAce();
+				GH.HitOrStay();
+			}
+			
 			System.out.printf("=> [%02d]", Arrays.stream(GH.Player).sum());
 			// -------------------------- 플레이어 파트 끝 ---------------------------- //
 			
 			// -------------------------- 게임 결과/마무리 ---------------------------- //
 			System.out.print("\n\n*RESULT* => ");
 			WhoWins();
+			clock.ClockOff();
 			
 			System.out.printf("[Dealer] Win: %d | Draw : %d | Lose : %d\n", dealerStats[0], dealerStats[1], dealerStats[2]);
 			System.out.printf("[Player] Win: %d | Draw : %d | Lose : %d\n", playerStats[0], playerStats[1], playerStats[2]);
-			
+
 		} catch(NullPointerException e) {
 			int lastCards=0;
 			for(int i=0; i<CD.Deck.length; i++) { if(CD.Deck[i]!=null) lastCards++; }
@@ -118,11 +127,6 @@ public class InGame {
 				dealerStats[0]++;
 				playerStats[2]++;
 			}
-			else {
-				System.out.println("- DRAW -");
-				playerStats[1]++;
-				dealerStats[1]++;
-			}
 		}
 	} // END - private void WhoWins()
 	
@@ -157,5 +161,10 @@ public class InGame {
 		}
 		else if(GH.lastFourCard==2) GH.GameCloser();
 	} // END - private void FinalMatch()
+	
+//	private void DealerBust() {
+//		
+//		
+//	} // END - private void DealerBust()
 	
 } // END - public class InGame {}

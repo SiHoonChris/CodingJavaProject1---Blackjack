@@ -91,6 +91,7 @@ public class CardDeck extends Card {
 				ar1[i]=0;
 				ar2[i]=null;}
 		}
+
 	} // END - public void Renew(int[] ar1, Card[] ar2, int num)
 	
 } // End - public class CardDeck extends Card {}

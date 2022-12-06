@@ -25,7 +25,7 @@ public class Timer extends JFrame implements Runnable {
 		setBackground(Color.BLACK);
 		setResizable(false);
 		setVisible(true);
-	}
+	} // END - Timer()
 	
 	// Thread 참고
 	// https://kim-jong-hyun.tistory.com/101
@@ -46,9 +46,9 @@ public class Timer extends JFrame implements Runnable {
 		
 	} // END - public void run()
 	
-	public void ClockOff() {
+	public void ClockOff() { // 시계 윈도우(프레임) 없앰
 		dispose();
-	}
+	} // END - public void ClockOff()
 	
 	
 } // END - public class Timer extends JFrame implements Runnable {}

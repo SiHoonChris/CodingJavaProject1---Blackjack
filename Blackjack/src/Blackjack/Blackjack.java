@@ -12,12 +12,13 @@ public class Blackjack{
 		GH.GameOpener();
 		CD.Shuffle();
 		CD.Converter();
-		B.BettingDefault(); // (게임 시작 전) 베팅 관련 설정
+		B.BettingDefault();
 
 		while(true) {
-			// Turn 시작 전 최초 베팅(FirstBetting()) (게임 중에 이뤄지는 베팅은 InGame.java에서)
+			if(!CD.betSystemOff)B.FirstBetting();
 			IG.PlayBlackjack();
 			int cardsUsed = CD.cardsInTheDeck(GH.Dealer, GH.Player);
+			B.BettingResult();
 			CD.Renew(CD.gamingDeck, CD.Deck, cardsUsed);
 		}
 	}

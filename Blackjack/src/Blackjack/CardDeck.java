@@ -34,6 +34,7 @@ public class CardDeck extends Card {
 	public static int[] gamingDeck = new int[52];
 	int unusedCard = Deck.length; // cardsInTheDeck()
 	int sum = 0; // 한 턴에 사용한 카드 장 수 누적 - renew()
+	static boolean betSystemOff;  // 베팅 시스템 on/off
 	
 	CardDeck() { // 카드덱(배열) 생성
 		int idx=0;
@@ -91,6 +92,8 @@ public class CardDeck extends Card {
 				ar1[i]=0;
 				ar2[i]=null;}
 		}
+		
+		if(ar1.length-sum<=4) betSystemOff=true;
 
 	} // END - public void Renew(int[] ar1, Card[] ar2, int num)
 	

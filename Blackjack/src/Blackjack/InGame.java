@@ -15,11 +15,14 @@ public class InGame {
 	int matchCnt=0;
 	int[] dealerStats = {0, 0, 0};  // 승, 무, 패
 	int[] playerStats = {0, 0, 0};
+	static boolean dealerWin;
+	static boolean playerWin;
 	
 	public void PlayBlackjack() { // 게임 진행 전반
 		try {
 			Timer clock = new Timer();
 			Thread timer = new Thread(clock);
+
 			for(int i=0; i<GH.Dealer.length; i++) GH.Dealer[i]=0;
 			for(int i=0; i<GH.Player.length; i++) GH.Player[i]=0;
 			// 메인 메서드에서 반복문 적용 => 코드 시작부분에서 최신화 안해줄시 계산 오류 생김
@@ -42,7 +45,7 @@ public class InGame {
 			if(CD.Deck[4].number=="A" && GH.Dealer[0]+GH.Dealer[1]<11) {
 				GH.Dealer[2]=11;
 			}
-	
+			
 			matchCnt++;
 			System.out.println("================= Turn "+matchCnt+" =================");
 			timer.start();
@@ -102,11 +105,13 @@ public class InGame {
 		if(dealerScore<=21 && playerScore<=21) {
 			if(dealerScore>playerScore) { 
 				System.out.println("[Dealer] WIN!");
+				dealerWin=true;
 				dealerStats[0]++;
 				playerStats[2]++;
 			}
 			else if(dealerScore<playerScore) {
 				System.out.println("[Player] WIN!");
+				playerWin=true;
 				playerStats[0]++;
 				dealerStats[2]++;
 			}
@@ -119,11 +124,13 @@ public class InGame {
 		else {
 			if(dealerScore>21 && playerScore<=21) {
 				System.out.println("[Player] WIN!");
+				playerWin=true;
 				playerStats[0]++;
 				dealerStats[2]++;
 			}
 			else if(playerScore>21 && dealerScore<=21) {
 				System.out.println("[Dealer] WIN!");
+				dealerWin=true;
 				dealerStats[0]++;
 				playerStats[2]++;
 			}
@@ -161,10 +168,6 @@ public class InGame {
 		}
 		else if(GH.lastFourCard==2) GH.GameCloser();
 	} // END - private void FinalMatch()
-	
-//	private void DealerBust() {
-//		
-//		
-//	} // END - private void DealerBust()
+
 	
 } // END - public class InGame {}

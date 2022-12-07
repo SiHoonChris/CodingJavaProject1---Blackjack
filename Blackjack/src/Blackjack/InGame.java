@@ -17,6 +17,8 @@ public class InGame {
 	int[] playerStats = {0, 0, 0};
 	static boolean dealerWin;
 	static boolean playerWin;
+	static boolean dealerWin21;
+	static boolean playerWin21;
 	
 	public void PlayBlackjack() { // 게임 진행 전반
 		try {
@@ -106,12 +108,14 @@ public class InGame {
 			if(dealerScore>playerScore) { 
 				System.out.println("[Dealer] WIN!");
 				dealerWin=true;
+				if(dealerScore==21) dealerWin21=true;
 				dealerStats[0]++;
 				playerStats[2]++;
 			}
 			else if(dealerScore<playerScore) {
 				System.out.println("[Player] WIN!");
 				playerWin=true;
+				if(playerScore==21) playerWin21=true;
 				playerStats[0]++;
 				dealerStats[2]++;
 			}
@@ -125,12 +129,14 @@ public class InGame {
 			if(dealerScore>21 && playerScore<=21) {
 				System.out.println("[Player] WIN!");
 				playerWin=true;
+				if(playerScore==21) playerWin21=true;
 				playerStats[0]++;
 				dealerStats[2]++;
 			}
 			else if(playerScore>21 && dealerScore<=21) {
 				System.out.println("[Dealer] WIN!");
 				dealerWin=true;
+				if(dealerScore==21) dealerWin21=true;
 				dealerStats[0]++;
 				playerStats[2]++;
 			}

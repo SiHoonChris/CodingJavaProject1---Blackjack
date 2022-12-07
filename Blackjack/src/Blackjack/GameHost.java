@@ -7,11 +7,11 @@ import java.util.concurrent.TimeUnit;
 
 //Participate(), ParticipateCheck(), GameCloser(), GameOpener(), OnlyFourCards(), WhatIsYourAce(), WhatIsYourAce(int n), HitOrStay()
 public class GameHost {
-
 	CardDeck CD; // CardDeck 클래스 호출
 	static int[] Dealer = new int[3];  // 매 Turn에서 Dealer가 보유한 카드 
 	static int[] Player = new int[12];  // 매 Turn에서 Player가 보유한 카드
 	int lastFourCard; // 카드가 4장 남았을시 게임 진행에 대한 대답
+	static int numberOfHit;
 	
 	private void Participate() { // 게임 시작 전 확인
 		System.out.println("==========================================");
@@ -161,6 +161,7 @@ public class GameHost {
 				if(select.equals("HIT")) {						
 					if(CD.gamingDeck[i]!=0) {
 						Player[num]=CD.gamingDeck[i];
+						numberOfHit++;
 						System.out.print(CD.Deck[i].pattern+"-"+CD.Deck[i].number+"\n");
 						if(CD.Deck[i].number=="A") { WhatIsYourAce(num); }
 						num++;

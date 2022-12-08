@@ -55,7 +55,7 @@ public class CardDeck extends Card {
 		}
 	} // END - public void shuffle()
 	
-	public int[] Converter() { // 개별 카드의 값을 계산하기 위해 Card형 데이터를 int형으로 전환
+	public void Converter() { // 개별 카드의 값을 계산하기 위해 Card형 데이터를 int형으로 전환
 		for(int i=0; i<Deck.length; i++) {
 			if(Deck[i].number=="K"||Deck[i].number=="Q"||Deck[i].number=="J")
 				{ gamingDeck[i]=10; }
@@ -65,7 +65,6 @@ public class CardDeck extends Card {
 				{ int num = Integer.parseInt(Deck[i].number);
 				  gamingDeck[i]=num; }
 		}
-		return gamingDeck;
 	} // END - public int[] Converter()
 
 	public int cardsInTheDeck(int[] Dealer, int[] Player) { // 남은 카드 수 계산
@@ -93,7 +92,7 @@ public class CardDeck extends Card {
 				ar2[i]=null;}
 		}
 		
-		if(ar1.length-sum<=4) betSystemOff=true;
+		if(ar1.length-sum<4) betSystemOff=true;
 
 	} // END - public void Renew(int[] ar1, Card[] ar2, int num)
 	

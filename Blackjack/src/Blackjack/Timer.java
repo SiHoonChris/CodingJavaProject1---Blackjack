@@ -2,14 +2,13 @@ package Blackjack;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.concurrent.TimeUnit;
 
 public class Timer extends JFrame implements Runnable {
-	Betting B = new Betting();
 	String sec;
 	JLabel time = new JLabel();
 	JPanel panel = new JPanel();
+	InGame IG;
 	static boolean timeOver;
 	
 	Timer() {
@@ -32,7 +31,7 @@ public class Timer extends JFrame implements Runnable {
 	// Thread 참고
 	// https://kim-jong-hyun.tistory.com/101
 	// https://aileen93.tistory.com/105
-	public void run() {
+	public void run() { // Thread는 PlayBlackjack 내에서만 작동해야 한다.
 		
 		while(true) {
 			try {
@@ -42,7 +41,8 @@ public class Timer extends JFrame implements Runnable {
 									timeOver=true;
 									// Player에게 Time-Penalty 안내
 									System.out.println("\n[Dealer] : Penalty [Time-Over : 60sec.]");
-									System.out.printf("           [Player] (-%,d), [Dealer] (+%,d)\n", B.minimumBet, B.minimumBet);
+									System.out.printf("           [Player] (-%,d), [Dealer] (+%,d)\n", 
+													   Betting.minimumBet, Betting.minimumBet);
 									}
 					else          { sec="00"; }
 					
@@ -63,8 +63,8 @@ public class Timer extends JFrame implements Runnable {
 	private void TimeOverPenalty() { // 시간 초과에 대한 패널티 지불 (베팅 규칙)
 	//- 60초 안에 한 Turn이 끝나지 않으면, Player가 Dealer에게 패널티(최소 베팅 금액) 지급(게임 결과-승무패 에 상관없이)
 		if(timeOver==true) {
-			B.playerWallet-=B.minimumBet;
-			B.dealerWallet+=B.minimumBet;
+			Betting.playerWallet-=Betting.minimumBet;
+			Betting.dealerWallet+=Betting.minimumBet;
 		}
 		timeOver=false;
 	} // END - private void TimeOverPenalty()

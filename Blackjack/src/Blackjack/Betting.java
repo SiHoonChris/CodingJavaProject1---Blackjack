@@ -1,23 +1,11 @@
 package Blackjack;
 
-//구현할 규칙(남은 내용들)
-//1. 기본
-//- Player 또는 Dealer의 금액 보유량이 각자의 최소 베팅 금액보다 적어질 경우 바로 게임 종료
-//- 마지막 경기가 무승부로 끝나면, bank에 모인 돈 반반 나눠가짐(bank에 모인 돈이 홀수일 경우 Player가 더 받는다.)
-//- 베팅 과정 중에 보유금이 바닥날 경우 1(예를 들어, 이전 게임 결과가 Draw여서 Bank에 돈이 묶여 있는 상태이기에 최소 베팅 금액보다
-//  보유금이 더 적다. 그렇기에 현재 게임에서 베팅이 불가능하다. => bank에 쌓인 돈 전부 패자에게 넘겨주고 경기 종료)
-//- 베팅 과정 중에 보유금이 바닥날 경우 1(게임 시작 전 베팅을 함으로써 보유금이 최소 베팅 금액보다 적게 남았다.
-//  => 정상 진행 / 이후 결과에 따라 룰 적용)
-
 
 import java.util.Scanner;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 
-// BettingDefault(), FirstBetting(), BettingResult(), PayForHit(), TwentyOneEnd()
+// BettingDefault(), FirstBetting(), BettingResult(), BettingCalculator(), PayForHit(), TwentyOneEnd()
 public class Betting {
-	InGame IG = new InGame();
-	GameHost GH = new GameHost();
 	
 	static int playerWallet;
 	static int dealerWallet;
@@ -25,7 +13,7 @@ public class Betting {
 	static int minimumBet;
 	static int maximumBet;
 	static int playerBet;
-	
+	boolean unableToBet;
 	
 	public void BettingDefault() {	// 베팅 관련 금액 설정	
 		System.out.println("=========== Setting for Betting ===========");
@@ -99,21 +87,41 @@ public class Betting {
 		}
 	} // END - public void FirstBetting()
 	
+	public void BettingResult() { // 잔액 확인/계산
+		BettingCalculator();
+		
+		// 현황 출력
+		System.out.println("\n================= Account =================");
+		System.out.printf("[Dealer] : %,d\n", dealerWallet);
+		System.out.printf("[Player] : %,d\n", playerWallet);
+		System.out.printf("[Bank]   : %,d\n", bank);
+		if(GameHost.numberOfHit!=0)
+			System.out.printf("[Hit]    : %,d\n", GameHost.numberOfHit);
+		System.out.println("===========================================\n\n");
+		
+		// 초기화
+		playerBet=0;
+		InGame.dealerWin=false;
+		InGame.playerWin=false;
+		InGame.dealerWin21=false;
+		InGame.playerWin21=false;
+		GameHost.numberOfHit=0;
+	} // END - public void BettingResult()
 	
-	public void BettingResult() {  // 잔액 확인/계산
+	private void BettingCalculator() {  // 잔액 계산
 		PayForHit(); // 추가 베팅이 이뤄졌을 시 계산 실행
 		
 		// 승무패에 따라 계산
-		if(IG.dealerWin==true && IG.playerWin==false) { // [Dealer] Win
+		if(InGame.dealerWin==true && InGame.playerWin==false) { // [Dealer] Win
 			dealerWallet += bank;
 			bank=0;
 		}
-		else if(IG.playerWin==true && IG.dealerWin==false) { // [Player] Win
+		else if(InGame.playerWin==true && InGame.dealerWin==false) { // [Player] Win
 			//- Player가 1회 이상의 'hit' 선택 후 승리했을 시,
 			//  Dealer는 Player가 추가베팅한 금액만큼 Player에게 지불해야 한다.
-			if(GH.numberOfHit!=0) {
-				dealerWallet-=GH.numberOfHit*minimumBet;
-				bank+=GH.numberOfHit*minimumBet;
+			if(GameHost.numberOfHit!=0) {
+				dealerWallet-=GameHost.numberOfHit*minimumBet;
+				bank+=GameHost.numberOfHit*minimumBet;
 			}
 			playerWallet += bank;
 			bank=0;
@@ -122,31 +130,14 @@ public class Betting {
 		// 21점으로 게임 종료 시 추가되는 프리미엄 실행
 		TwentyOneEnd(); // (추가 베팅 제외) 자신이 베팅한 만큼을 상대로부터 추가로 가져온다.
 		
-		// 현황 출력
-		System.out.println("\n================= Account =================");
-		System.out.printf("[Dealer] : %,d\n", dealerWallet);
-		System.out.printf("[Player] : %,d\n", playerWallet);
-		System.out.printf("[Bank]   : %,d\n", bank);
-		if(GH.numberOfHit!=0)
-			System.out.printf("[Hit]    : %,d\n", GH.numberOfHit);
-		System.out.println("===========================================\n\n");
-		
-		// 초기화
-		playerBet=0;
-		IG.dealerWin=false;
-		IG.playerWin=false;
-		IG.dealerWin21=false;
-		IG.playerWin21=false;
-		GH.numberOfHit=0;
-		
 	} // END - public void BettingResult()
 	
 	
 	private void PayForHit() { // 2. 추가 베팅
 	//- 'hit' 선택시 '최소 베팅 금액'을 추가 베팅해야 함
-		if(GH.numberOfHit!=0) {
-			playerWallet-=GH.numberOfHit*minimumBet;
-			bank+=GH.numberOfHit*minimumBet;
+		if(GameHost.numberOfHit!=0) {
+			playerWallet-=GameHost.numberOfHit*minimumBet;
+			bank+=GameHost.numberOfHit*minimumBet;
 		}
 	} // END - public void PayForHit()
 	
@@ -157,14 +148,14 @@ public class Betting {
 	//  (추가 베팅에 대한 중복 보상을 피하기 위함)
 		
 		// Player가 21점으로 게임 승리시 돈의 이동
-		if(IG.playerWin21==true) {
+		if(InGame.playerWin21==true) {
 			dealerWallet-=playerBet;
 			bank+=playerBet;
 			playerWallet+=bank;
 			bank=0;
 		}
 		// Dealer가 21점으로 게임 승리시 돈의 이동
-		if(IG.dealerWin21==true) {
+		if(InGame.dealerWin21==true) {
 			playerWallet-=maximumBet;  // 매 turn마다 dealer의 베팅금액은 maximumBet이다.
 			bank+=maximumBet;
 			dealerWallet+=bank;
@@ -172,5 +163,5 @@ public class Betting {
 		}
 	} // END - private void TwentyOneEnd()
 	
-	
+
 } // END - public class Betting {}

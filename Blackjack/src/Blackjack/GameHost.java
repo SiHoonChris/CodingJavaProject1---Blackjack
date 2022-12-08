@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 
 //Participate(), ParticipateCheck(), GameCloser(), GameOpener(), OnlyFourCards(), WhatIsYourAce(), WhatIsYourAce(int n), HitOrStay()
 public class GameHost {
-	CardDeck CD; // CardDeck 클래스 호출
 	static int[] Dealer = new int[3];  // 매 Turn에서 Dealer가 보유한 카드 
 	static int[] Player = new int[12];  // 매 Turn에서 Player가 보유한 카드
 	int lastFourCard; // 카드가 4장 남았을시 게임 진행에 대한 대답
@@ -113,9 +112,9 @@ public class GameHost {
 				System.out.print("1 or 11 ? =>  ");
 				int Answer = sc.nextInt();
 				
-				if(CD.Deck[0].number=="A" && Answer==11) Player[0]=11;
-				else if(CD.Deck[2].number=="A" && Answer==11) Player[1]=11;
-				else if(CD.Deck[0].number=="A" && CD.Deck[2].number=="A" && Answer==11) Player[0]=11;
+				if(CardDeck.Deck[0].number=="A" && Answer==11) Player[0]=11;
+				else if(CardDeck.Deck[2].number=="A" && Answer==11) Player[1]=11;
+				else if(CardDeck.Deck[0].number=="A" && CardDeck.Deck[2].number=="A" && Answer==11) Player[0]=11;
 				
 				if(Answer==1||Answer==11) break;
 			}
@@ -159,11 +158,11 @@ public class GameHost {
 			String select = sc.next();
 			select = select.toUpperCase();
 				if(select.equals("HIT")) {						
-					if(CD.gamingDeck[i]!=0) {
-						Player[num]=CD.gamingDeck[i];
+					if(CardDeck.gamingDeck[i]!=0) {
+						Player[num]=CardDeck.gamingDeck[i];
 						numberOfHit++;
-						System.out.print(CD.Deck[i].pattern+"-"+CD.Deck[i].number+"\n");
-						if(CD.Deck[i].number=="A") { WhatIsYourAce(num); }
+						System.out.print(CardDeck.Deck[i].pattern+"-"+CardDeck.Deck[i].number+"\n");
+						if(CardDeck.Deck[i].number=="A") { WhatIsYourAce(num); }
 						num++;
 					} 
 					else { return; }

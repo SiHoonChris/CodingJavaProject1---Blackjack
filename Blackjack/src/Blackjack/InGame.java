@@ -2,6 +2,7 @@ package Blackjack;
 
 import java.util.Arrays;
 
+// Methods : 
 // PlayBlackjack(), WhoWins(), FinalMatch()
 public class InGame {
 
@@ -18,11 +19,12 @@ public class InGame {
 	static boolean playerWin;
 	static boolean dealerWin21;
 	static boolean playerWin21;
+	static boolean fourCardHalt;
 	
 	public void PlayBlackjack() { // 게임 진행 전반
 		try {
-//			Timer T = new Timer();
-//			Thread timer = new Thread(T);
+			Timer T = new Timer();
+			Thread timer = new Thread(T);
 
 			for(int i=0; i<GameHost.Dealer.length; i++) GameHost.Dealer[i]=0;
 			for(int i=0; i<GameHost.Player.length; i++) GameHost.Player[i]=0;
@@ -49,7 +51,7 @@ public class InGame {
 			
 			matchCnt++;
 			System.out.println("================= Turn "+matchCnt+" =================");
-//			timer.start();
+			timer.start();
 			
 			System.out.print("[Dealer] =>  ");
 			System.out.print(CardDeck.Deck[1].pattern+"-"+CardDeck.Deck[1].number+"\t");
@@ -79,7 +81,7 @@ public class InGame {
 		// -------------------------- 게임 결과/마무리 ---------------------------- //
 			System.out.print("\n\n*RESULT* => ");
 			WhoWins();
-//			T.ClockOff();
+			T.ClockOff();
 			
 			System.out.printf("[Dealer] Win: %d | Draw : %d | Lose : %d\n", dealerStats[0], dealerStats[1], dealerStats[2]);
 			System.out.printf("[Player] Win: %d | Draw : %d | Lose : %d\n", playerStats[0], playerStats[1], playerStats[2]);
@@ -92,8 +94,7 @@ public class InGame {
 				System.out.printf("================= Turn %d =================\n", ++matchCnt);
 				FinalMatch();
 			}
-			
-			GH.GameCloser();
+			else  GH.GameCloser();
 		// -------------------------- 게임 결과/마무리 ---------------------------- //
 		}
 
@@ -171,7 +172,8 @@ public class InGame {
 			System.out.printf("[Player] Win: %d | Draw : %d | Lose : %d\n", playerStats[0], playerStats[1], playerStats[2]);
 			System.out.println("\n( Cards in a Deck : 0 )");
 		}
-		else if(GH.lastFourCard==2) { GH.GameCloser(); }
+		else if(GH.lastFourCard==2)  fourCardHalt=true;
+		
 	} // END - private void FinalMatch()
 
 	

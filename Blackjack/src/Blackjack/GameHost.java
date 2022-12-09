@@ -5,7 +5,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-//Participate(), ParticipateCheck(), GameCloser(), GameOpener(), OnlyFourCards(), WhatIsYourAce(), WhatIsYourAce(int n), HitOrStay()
+// Methods : 
+// Participate(), ParticipateCheck(), GameCloser(), GameOpener(), OnlyFourCards().
+// WhatIsYourAce(), WhatIsYourAce(int n), HitOrStay()
 public class GameHost {
 	static int[] Dealer = new int[3];  // 매 Turn에서 Dealer가 보유한 카드 
 	static int[] Player = new int[12];  // 매 Turn에서 Player가 보유한 카드

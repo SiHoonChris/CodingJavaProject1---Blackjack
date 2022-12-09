@@ -4,7 +4,9 @@ package Blackjack;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-// BettingDefault(), FirstBetting(), BettingResult(), BettingCalculator(), PayForHit(), TwentyOneEnd()
+// Methods : 
+// BettingDefault(), FirstBetting(), BettingResult(), BettingCalculator(), PayForHit(),
+// TwentyOneEnd(), DrawEnd()
 public class Betting {
 	
 	static int playerWallet;
@@ -13,6 +15,7 @@ public class Betting {
 	static int minimumBet;
 	static int maximumBet;
 	static int playerBet;
+	int money;
 	boolean unableToBet;
 	
 	public void BettingDefault() {	// 베팅 관련 금액 설정	
@@ -24,7 +27,7 @@ public class Betting {
 			try {
 				System.out.println("[Dealer] : How much cash do you have?");
 				System.out.print("[Player] : ");
-				int money = sc.nextInt();
+				money = sc.nextInt();
 				
 				if(money>=100) {
 					System.out.println("[Dealer] : Good.");
@@ -91,13 +94,24 @@ public class Betting {
 		BettingCalculator();
 		
 		// 현황 출력
-		System.out.println("\n================= Account =================");
-		System.out.printf("[Dealer] : %,d\n", dealerWallet);
-		System.out.printf("[Player] : %,d\n", playerWallet);
-		System.out.printf("[Bank]   : %,d\n", bank);
-		if(GameHost.numberOfHit!=0)
-			System.out.printf("[Hit]    : %,d\n", GameHost.numberOfHit);
-		System.out.println("===========================================\n\n");
+		if(dealerWallet>0 && playerWallet>0) {
+			System.out.println("\n================= Account =================");
+			System.out.printf("[Dealer] : %,d\n", dealerWallet);
+			System.out.printf("[Player] : %,d\n", playerWallet);
+			System.out.printf("[Bank]   : %,d\n", bank);
+			if(GameHost.numberOfHit!=0)
+				System.out.printf("[Hit]    : %,d\n", GameHost.numberOfHit);
+			System.out.println("===========================================\n\n");
+		}
+		else {  // 이 경우 자동으로 게임 종료 (파산 : 참가자가 현재 보유금 이상으로 지불해야 할 금액이 쌓인 경우)
+			System.out.println("\n================= Account =================");
+			System.out.printf("[Dealer] : %,d\n", (dealerWallet<=0) ? 0 : 2*money);
+			System.out.printf("[Player] : %,d\n", (playerWallet<=0) ? 0 : 2*money);
+			System.out.printf("[Bank]   : %,d\n", 0);
+			if(GameHost.numberOfHit!=0)
+				System.out.printf("[Hit]    : %,d\n", GameHost.numberOfHit);
+			System.out.println("===========================================\n\n");
+		}
 		
 		// 초기화
 		playerBet=0;
@@ -163,5 +177,12 @@ public class Betting {
 		}
 	} // END - private void TwentyOneEnd()
 	
-
+	public void DrawEnd() { // 무승부 또는 승부 없이 게임이 종료되었을 시 bank에 모인 금액을 절반으로 나눠가짐
+		playerWallet += Math.ceil(bank/2);
+		bank -= Math.ceil(bank/2);
+		dealerWallet += bank;
+		bank=0;
+	} // END - public void DrawEnd()
+	
+	
 } // END - public class Betting {}

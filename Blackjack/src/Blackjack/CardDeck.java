@@ -27,6 +27,7 @@ class Card {
 	
 } // END - class Card {}
 
+// Methods(or Constructor) :
 //CardDeck(), Shuffle(), Converter(), cardsInTheDeck(int[] Dealer, int[] Player), Renew()
 public class CardDeck extends Card {
 	

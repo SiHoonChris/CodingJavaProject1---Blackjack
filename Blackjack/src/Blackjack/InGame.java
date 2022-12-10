@@ -170,7 +170,6 @@ public class InGame {
 			WhoWins();
 			System.out.printf("\n[Dealer] Win: %d | Draw : %d | Lose : %d\n", dealerStats[0], dealerStats[1], dealerStats[2]);
 			System.out.printf("[Player] Win: %d | Draw : %d | Lose : %d\n", playerStats[0], playerStats[1], playerStats[2]);
-			System.out.println("\n( Cards in a Deck : 0 )");
 		}
 		else if(GH.lastFourCard==2)  fourCardHalt=true;
 		

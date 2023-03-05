@@ -1,30 +1,18 @@
 # CodingJavaProject1 - Blackjack (22.10.19 ~ 22.10.27)
-
-<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">  
-
 ![blackjack_game_start](https://user-images.githubusercontent.com/109140000/206840638-fc655fc7-6e7e-49e1-b431-f34f383851ce.png)  
 ![blackjack_game_ing](https://user-images.githubusercontent.com/109140000/206840642-b597c0ba-c885-4f71-988d-22963822342a.png)  
 ![blackjack_game_end](https://user-images.githubusercontent.com/109140000/206840649-11896ccf-847f-4e93-ad92-a310b47c8019.png)  
 
-<div align='right'>최초 제작 : 22.10.19 ~ 22.10.27 , 개선 및 보완 : 22.11.27 ~ 22.12.10</div>
+### Description  
+&nbsp;&nbsp;&nbsp;&nbsp;JAVA로 구현한 블랙잭 게임
 
-<br><br><br>  
+### Tech Stack  
+&nbsp;&nbsp;&nbsp;&nbsp;Java (SE 11)  
+&nbsp;&nbsp;&nbsp;&nbsp;(Tool : Eclipse)
 
-### 목차
-&nbsp; &nbsp; 개발 동기 - 설계 - 후기 - 개선 사항 - 참고
-<hr>  
-
-## 개발 동기  
-- 블랙잭 제작
-- 평소에 복습 겸, 수업이 끝나고 나면 배운 내용들을 활용해 간단한 프로그램들을 만들고는 했다.
-(참고 : Repository - JavaStudy : https://github.com/SiHoonChris/JavaStudy/commits/master/JVs/src/SelfMade )
-그러던 중, 프로그램을 만드는 것보다 무엇을 만들지 생각해내는 것이 더 어려워지던 시점,
-같이 학원에서 수업을 듣는 형이 자신이 지금 만들고 있는 프로그램을 나도 한 번 만들어 볼 것을 권유했다.
-그것은 블랙잭이었다.
-- 정확한 정보인지는 모르겠지만, 그 형의 말에 따르면 2017년도 '배달의 민족' 입사 문제였다고 한다.
-- 흥미가 생긴 나는 도전하기로 했다.
-
-## 설계
+### Additional  
+- 카드 호출 방식 (배열 내부의 값 수정 방식)  
+![Array_of_Blackjack](https://user-images.githubusercontent.com/109140000/206840661-d630d2c1-4490-4986-b892-f4c8a2e3c7ba.png)  
 - 규칙
 1) 게임의 진행 및 운영 등 전반적인 규칙은 기존 블랙잭과 동일하다. <br>
 그렇기에, 기존의 블랙잭 규칙에서 축소/추가된 내용만을 다루면 다음과 같다.
@@ -57,83 +45,4 @@
 &nbsp; &nbsp;   그 참가자(A)의 보유 금액보다 커져서 지불할 수 없게 된 경우  
 &nbsp; &nbsp;   그 참가자(A)가 보유한 금액 전부를 상대 참가자(B)에게 지급하고 전체 게임을 종료한다.  
 
-- 카드 호출 방식 (배열 내부의 값 수정 방식)  
-![Array_of_Blackjack](https://user-images.githubusercontent.com/109140000/206840661-d630d2c1-4490-4986-b892-f4c8a2e3c7ba.png)  
 
-## 후기  
-학원에서 자바를 처음 경험하고 나서, 내 손으로 직접 만들어본 자바 프로그램들 중 제일 긴 프로그램이었다 - 
-( 이후 Minesweeper( https://github.com/SiHoonChris/CodingJavaProject2_Minesweeper )를 만들기 전까지는. )
-그래서 다 만들고 나서 매우 뿌듯했고, 한편으로는 후련했다. 이 프로그램을 만들 당시 나는 학원에서는 한창 객체지향 개념을
-배우고 있었다. 그래서 어떻게든, 한 번이라도 그 수업 내용들을 내 손으로 직접 활용해보고자 하는 욕심이 있었다.
-그 때문인지, 이 글을 쓰고 있는 지금 시점(2022.11.28 / 마지막 수정 2022.12.10)에서 다시 내 코드를 훑어 봤을 때, 불필요하고 억지스러운 부분도 어느 정도 보이고,
-수정할 점들과 개선할 점들도 다소 보인다. 이 프로그램을 한창 만들고 있었을 때가 자바를 배우기 시작한지 한 달 정도 된 시점이었는데,
-한 달 배운 다른 사람들의 수준이 어느 정도인지는 잘 모르겠으나, 나 스스로는 잘했다고 생각한다.  
-이후 기존에 작성된 코드를 수정/개선하는 작업을 진행했는데, 아무래도 학원에서 새롭게 배우는 내용들을 따라가다 보니 Java를 활용하는 절대적인 시간이 부족했고,
-그러다보니 잊어버렸거나 기억이 흐려진 개념들이 많았다. 그래서 이번에 이 프로그램을 다시 작업하면서 그러한 내용들을 다시 한 번 복습할 수 있는 좋은 기회가 된 것 같다.
-여담으로, 이 프로그램을 만들면서 전반적으로 어려웠던 점은 머릿속에 있는 아이디어들을 코드로 구현해 내는 것이었는데, 초기에는 고민에 고민을 거쳐
-기발한 아이디어를 생각해내도 그것을 어떻게 코드로 작성할지 막막할 때가 많았으며, 어떨 때는 '현재 내 수준에서는 불가능하다'라는
-판단에 포기하고 다른 방법을 찾기도 했었다. 그런데 작업을 다시 시작하고 보니, 그 때 겪었던 어려움이 지금의 나에게는 쉬운 문제여서,
-그런 점이 흥미롭게 다가오기도 했다.   
-
-## 개선 사항 
-- Blackjack  
-(이 프로그램을 처음 만들 때 (22년 10월 경)는 배운게 많지 않아서 활용하거나 시도할 방법들이 별로 없었다.
-하지만 현재(22년 11~12월 경)는 그 때보다 더 배웠고 경험도 쌓였으니, 그 동안 배운 내용들과 경험들을 최대한 활용할 수 있도록 했다.)  
-1) 코드 정리 : 더 직관적이고 심플하게. 관리가 용이하고, 작동 원리를 이해/파악하기 쉽게  
-&nbsp;(하나의 클래스 파일 안에 모든 클래스와 메서드를 다 넣는 것이 아니라 그것들을 여러 개의 파일에 나눌 것)  
-&nbsp;(2022.12.03 수정 완료)  
-2) 게임 중 hit/stay에 대한 선택 시, 대소문자 구분 없이 입력되도록 코드 수정  
-&nbsp;(2022.11.27 수정 완료) 
-3) 게임 시작 동의 여부를 묻는 도입부 만들기 ('Yes'일 경우 5초 카운트하고 시작, 'No'일 경우 바로 프로그램 종료)  
-&nbsp;(2022.11.29 수정 완료) 
-4) Match가 이뤄질 때마다 전적(승무패) 표시  
-&nbsp;(2022.11.29 수정 완료)  
-5) 베팅 기능 추가 : 게임 진행 시 얼마를 걸었으며, 얼마를 잃거나 얻었고, 게임 종료 후 최종 결과가 어떻게 되는지 출력  
-&nbsp;(2022.12.09 수정 완료)  
-6) 카드가 단 4장 남았을시, 게임 진행 동의 여부 묻기('Yes'일 경우 베팅 걸고 마지막 Match 진행, 'No'일 경우 패널티 금액 내고 경기 종료)<br>
-&nbsp;(기존 코드에서는 카드가 단 4장 남았을 시, 프로그램이 자동으로 Match를 바로 진행.)   
-&nbsp;(2022.11.29 수정 완료) 
-7) 'Match'보다는 'Turn'이 더 어울릴 것 같다. 그렇게 중요한 부분은 아니니, 다른 개선사항들 먼저 마치고 나서 나중에 실시  
-&nbsp;(2022.11.29 수정 완료)  
-8) dealer가 bust되면 자동으로 turn을 종료하도록 코드 수정 (hit/stay 묻지 않고, 바로 Player가 win)  
-&nbsp;(2022.12.04 수정 완료)  
-9) "1 or 11" 선택 때, 문자 입력하면 프로그램에 예외 발생하고 종료됨. 오타 발생시 프로그램이 종료되지 않도록 코드 수정  
-&nbsp;(2022.12.03 수정 완료)  
-10) Thread 이용해서 Timer 만들기(시간 제한과 패널티 적용)  
-&nbsp;(2022.12.04 수정 완료) 
-
-- SiHoonChris
-1) '초심자의 행운', '소 뒷걸음질 치다 쥐 잡는 격'. 이런 방식의 해결이 많았는데 이제 운이 아니라 실력으로 해결 방법을 찾아내는 경우가 더 많아져야 할 것이다.  
-2) 막히거나 어려움이 있었다면 자세하게 기록해두자. 그리고 다시 보면서, 내가 어떤 부분에서 어려움이 있었고 그것을 어떻게 해결했는지 파악하고,
-더 나은 방법은 없었는지 생각해보면서 공부하자.
-3) 확실히 CS 지식이 있는 상태에서 코드를 짤 때와 그렇지 않은 상태에서 짤 때, 문제에 접근하고 해결하는 방식이 달라지는 것을 느꼈다. 코딩을 많이 하는 것도 중요하지만
-시간이 생길 때 틈틈이 CS지식 공부도 병행하자
-
-## 참고
-- 11-17-2022 부, 별도 관리
-- 현재 Repository에서의 기록  
-11-17-2022 / JavaStudy에 있던 프로그램 파일 현Repo로 이전  
-11-27-2022 / hit/stay 입력시 대소문자 구분 없앰  
-11-29-2022 / 매 Turn마다 승무패 전적 표시, 카드가 단 4장 남았을시 게임 진행 동의 여부 확인, 게임 시작 동의 여부 확인, 출력문 수정('Match' -> 'Turn')  
-12-01-2022 / 코드 정리(기존 코드 세분화), 메서드 보완(try/catch 활용, 사용자 입력 값에서 발생할 수 있는 Exception 처리)  
-12-02-2022 / 코드 정리(기존 코드 세분화), 베팅 룰 구상  
-12-03-2022 / 코드 정리(기존 코드 세분화), 메서드 보완(try/catch 활용, 사용자 입력 값에서 발생할 수 있는 Exception 처리)  
-12-04-2022 / Thread(Timer) 구현, Dealer가 bust되면 바로 turn 종료되도록 코드 수정  
-12-05-2022 / 베팅 규칙 Betting.java 생성  
-12-06-2022 / 기본적인 베팅 파트 구현  
-12-07-2022 / 세부적인 베팅 파트 구현  
-12-08-2022 / 참가자의 보유금액에 따른 게임 종료 구현  
-12-09-2022 / Thread 예외 발생 제거, 게임 종료에 따른 BettingResult 전시 보완, 참가자의 보유금액에 따른 게임 종료 구현부 보완  
-12-10-2022 / 카드가 4장 남은 상황에서 게임 종료 시의 출력문 수정  
-
-- 이전 Repository : JavaStudy
-- JavaStudy 내의 Commit 기록들  
-(10-19-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/4cb7c10c8469d6c5b418385774517e116f8d1fd4  
-(10-20-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/b03d5f3a5eb06121c930cd74359c4fe455ed9463  
-(10-21-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/0443ceddd06bbabaf0fa4651f3588bc1e82d0ada  
-(10-22-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/6974413870c21b48baf140a8d13f18c51ed9ba71  
-(10-23-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/1710c51f52bd9c5bb7fb89049dbfe2217f4b93b5  
-(10-24-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/3883b58b9d55c4bfbe46e8adfdbda3fc4dd9be2b  
-(10-25-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/c222508e2be73998a19f73b097231e75799b6547  
-(10-26-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/c5f8895a5ad644eca09dad834c3d03ea1259d085  
-(10-27-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/f8729d5d7bd4d09eff7aeb82f24f4b115bd7953d  
